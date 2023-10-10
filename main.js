@@ -2,12 +2,12 @@ alert(
   "Bienvenido a Infinity Cellphone, Tenemos los mejores precios en celulares y tecnologia"
 );
 
-let correo = prompt("Ingrese el correo");
+let correo = prompt("Ingrese el Usuario");
 let contraseña = prompt("Ingrese la contraseña");
 if (correo != "" && contraseña != "") {
   alert(`${correo} Bienvenido a Infinity Cellphone`);
 } else {
-  alert("correo y contraseña son necesarios");
+  alert("Usuario y Contraseña son necesarios");
 }
 
 alert(
