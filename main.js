@@ -2,24 +2,25 @@ alert(
   "Bienvenido a Infinity Cellphone, Tenemos los mejores precios en celulares y tecnologia"
 );
 
-let correo = prompt("Ingrese el Usuario");
+let usuario = prompt("Ingrese el Usuario");
 let contraseña = prompt("Ingrese la contraseña");
-if (correo != "" && contraseña != "") {
-  alert(`${correo} Bienvenido a Infinity Cellphone`);
-} else {
+while (usuario == "" || contraseña == "") {
   alert("Usuario y Contraseña son necesarios");
+  correo = prompt("Ingrese el usuario");
+  contraseña = prompt("Ingrese la contraseña");
+  break;
 }
-
+alert(`${usuario} Bienvenido a Infinity Cellphone`);
 alert(
   "A continuacion le proporcionamos los celuares en stock de las marcas : iphone , samsung y xiaomi"
 );
 let modeloElegido = Number(
   prompt(
-    "Porfavor, a continuacion seleccione el NUMERO del celular que desea:         1-iphone 15 pro max               2-samsung s23 ultra         3-xiaomi poco x4 pro        4-samsung a54      5-iphone 13 pro            6-xiaomi redmi 10"
+    "Porfavor, a continuacion seleccione el NUMERO del celular que desea:         1-iphone 15 pro max               2-samsung s23 ultra         3-xiaomi poco x4 pro        4-samsung a54         5-iphone 13 pro            6-xiaomi redmi 10"
   )
 );
 
-while (modeloElegido < 1 || modeloElegido > 6) {
+while (modeloElegido < 1 || modeloElegido > 6 || isNaN(modeloElegido)) {
   modeloElegido = Number(
     prompt(
       "Porfavor, a continuacion seleccione el Numero del celular que desea:         1-iphone 15 pro max         2-samsung s23 ultra                    3-xiaomi poco x4pro         4-samsung a54      5-iphone 13 pro             6-xiaomi redmi 10"
@@ -55,7 +56,7 @@ let metodoPago = Number(
   )
 );
 
-while (metodoPago < 1 || metodoPago > 3) {
+while (metodoPago < 1 || metodoPago > 3 || isNaN(metodoPago)) {
   metodoPago = Number(
     prompt(
       "Seleccione el numero correspondiente al metodo de pago que quiera efectuar: 1-Tarjeta de Credito   2-Efectivo   3-Dolares"
@@ -69,7 +70,7 @@ switch (metodoPago) {
 
     let cuotas = Number(prompt("Seleccione cantidad de cuotas:3, 6, 12"));
 
-    while (cuotas !== 3 && cuotas !== 6 && cuotas !== 12) {
+    while ((cuotas !== 3 && cuotas !== 6 && cuotas !== 12) || isNaN(cuotas)) {
       cuotas = Number(prompt("Seleccione cantidad de cuotas:3, 6, 12"));
     }
     switch (cuotas) {
