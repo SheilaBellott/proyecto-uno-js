@@ -6,7 +6,7 @@ let usuario = prompt("Ingrese el Usuario");
 let contraseña = prompt("Ingrese la contraseña");
 while (usuario == "" || contraseña == "") {
   alert("Usuario y Contraseña son necesarios");
-  correo = prompt("Ingrese el usuario");
+  usuario = prompt("Ingrese el usuario");
   contraseña = prompt("Ingrese la contraseña");
 }
 alert(`${usuario} Bienvenido a Infinity Cellphone`);
