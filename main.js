@@ -96,7 +96,7 @@ switch (metodoPago) {
     alert(`Monto final es de $${450000 - 450000 * 0.05}`);
     break;
   case 3:
-    alert(`Haz seleccionado en Dolares, por lo cual el precio sera de :`);
+    alert(`Haz seleccionado en Dolares`);
     alert(`Monto final es de $${450 + 450 / 9.0}USD`);
     break;
 }
