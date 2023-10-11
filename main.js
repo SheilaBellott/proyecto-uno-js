@@ -86,9 +86,6 @@ switch (metodoPago) {
         recargo(0.15, 0.25, 0.35);
         alert(` Monto final es de $${resultadoRecargo12}`);
         break;
-      default:
-        alert(`Cantidad de cuotas no valida`);
-        break;
     }
     break;
   case 2:
