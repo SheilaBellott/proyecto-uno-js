@@ -11,95 +11,144 @@ while (usuario == "" || contraseña == "") {
 }
 alert(`${usuario} Bienvenido a Infinity Cellphone`);
 
-alert(
-  "A continuacion le proporcionamos los celulares en stock de las marcas : iphone , samsung y xiaomi"
-);
-let modeloElegido = Number(
-  prompt(
-    "Porfavor, a continuacion seleccione el NUMERO del celular que desea:         1-iphone 15 pro max               2-samsung s23 ultra         3-xiaomi poco x4 pro        4-samsung a54         5-iphone 13 pro            6-xiaomi redmi 10"
-  )
-);
+alert("Somos importadores directos de las marcas: iphone , samsung y xiaomi");
 
-while (modeloElegido < 1 || modeloElegido > 6 || isNaN(modeloElegido)) {
-  modeloElegido = Number(
-    prompt(
-      "Porfavor, a continuacion seleccione el Numero del celular que desea:         1-iphone 15 pro max               2-samsung s23 ultra         3-xiaomi poco x4pro        4-samsung a54      5-iphone 13 pro            6-xiaomi redmi 10"
-    )
-  );
-}
-switch (modeloElegido) {
-  case 1:
-    alert(`Usted a elegido el iphone 15 pro max $450000 `);
-    break;
-
-  case 2:
-    alert(`Usted a elegido el samsung s23 ultra $450000`);
-    break;
-
-  case 3:
-    alert(`Usted a elegido el xiaomi poco x4pro $450000`);
-    break;
-  case 4:
-    alert(`Usted a elegido el samsung a54 $450000`);
-    break;
-  case 5:
-    alert(`Usted a elegido el iphone 13 pro $450000`);
-    break;
-  case 6:
-    alert(`Usted a elegido el xiaomi redmi 10 $450000`);
-    break;
+class Producto {
+  constructor(nombre, memoria, precio) {
+    this.nombre = nombre;
+    this.memoria = memoria;
+    this.precio = precio;
+  }
 }
 
-let metodoPago = Number(
-  prompt(
-    "Seleccione el numero correspondiente al metodo de pago que quiera efectuar: 1-Tarjeta de Credito   2-Efectivo   3-Dolares"
-  )
-);
+const productos = [];
 
-while (metodoPago < 1 || metodoPago > 3 || isNaN(metodoPago)) {
-  metodoPago = Number(
-    prompt(
-      "Seleccione el numero correspondiente al metodo de pago que quiera efectuar: 1-Tarjeta de Credito   2-Efectivo   3-Dolares"
-    )
-  );
+productos.push(new Producto("iphone 15pro", "128gb", 900000));
+productos.push(new Producto("samsung s23", "256gb", 650000));
+productos.push(new Producto("xiaomi poco x4 pro", "64gb", 350000));
+
+const precios = {
+  dolar: 1000,
+  descuento: 0.05,
+};
+
+function buscarProducto(nombre) {
+  return productos.find((item) => item.nombre.includes(nombre));
 }
 
-switch (metodoPago) {
-  case 1:
-    alert("Haz seleccionado Tarjeta de Credito");
+function mostrarInfoProducto(producto) {
+  if (producto) {
+    alert(`
+        nombre: ${producto.nombre}
+        memoria: ${producto.memoria}
+        precio: $${producto.precio}
+        `);
+  } else {
+    alert("Producto no encontrado");
+  }
+}
 
-    let cuotas = Number(prompt("Seleccione cantidad de cuotas:3, 6, 12"));
+function procesarPago(producto, metodoPago, cuotas) {
+  if (producto) {
+    switch (metodoPago) {
+      case 1:
+        let recargo;
+        switch (cuotas) {
+          case 3:
+            recargo = 0.15;
+            break;
+          case 6:
+            recargo = 0.25;
+            break;
+          case 12:
+            recargo = 0.35;
+            break;
+        }
 
-    while ((cuotas !== 3 && cuotas !== 6 && cuotas !== 12) || isNaN(cuotas)) {
-      cuotas = Number(prompt("Seleccione cantidad de cuotas:3, 6, 12"));
-    }
-    switch (cuotas) {
+        const montoFinal = producto.precio + producto.precio * recargo;
+        alert(`Monto final es de $${montoFinal}`);
+        alert("!Gracias por su compra!");
+        break;
+
+      case 2:
+        alert(
+          `Haz seleccionado Efectivo, por lo que tienes un 5% de descuento!`
+        );
+        const montoDescuento =
+          producto.precio - producto.precio * precios.descuento;
+        alert(`Monto final es de $${montoDescuento}`);
+        alert("!Gracias por su compra!");
+        break;
+
       case 3:
-        recargo(0.15, 0.25, 0.35);
-        alert(` Monto final es de $${resultadoRecargo3}`);
+        const montoDolares = producto.precio / precios.dolar;
+        alert(`Monto final es de $${montoDolares} USD`);
+        alert("!Gracias por su compra!");
         break;
-      case 6:
-        recargo(0.15, 0.25, 0.35);
-        alert(` Monto final es de $${resultadoRecargo6}`);
-        break;
-      case 12:
-        recargo(0.15, 0.25, 0.35);
-        alert(` Monto final es de $${resultadoRecargo12}`);
+
+      default:
+        alert("Método de pago no válido.");
         break;
     }
-    break;
-  case 2:
-    alert(`Haz seleccionado Efectivo, por lo que tienes un 5% de descuento!`);
-    alert(`Monto final es de $${450000 - 450000 * 0.05}`);
-    break;
-  case 3:
-    alert(`Haz seleccionado en Dolares`);
-    alert(`Monto final es de $${450 + 450 / 9.0}USD`);
-    break;
+  } else {
+    alert("Producto no encontrado");
+  }
 }
 
-function recargo(recargo3, recargo6, recargo12) {
-  resultadoRecargo3 = recargo3 * 450000 + 450000;
-  resultadoRecargo6 = recargo6 * 450000 + 450000;
-  resultadoRecargo12 = recargo12 * 450000 + 450000;
+let nombre;
+let productoSeleccionado;
+
+while (true) {
+  while (true) {
+    nombre = prompt("Ingrese el modelo del celular");
+
+    if (nombre.trim() === "") {
+      alert("Ingrese un modelo de celular. Inténtelo nuevamente.");
+    } else {
+      break;
+    }
+  }
+
+  productoSeleccionado = buscarProducto(nombre);
+
+  if (productoSeleccionado) {
+    mostrarInfoProducto(productoSeleccionado);
+    let metodoPago;
+
+    while (true) {
+      metodoPago = Number(
+        prompt(
+          "Seleccione el método de pago: 1-Tarjeta de Crédito   2-Efectivo   3-Dólares"
+        )
+      );
+
+      if (metodoPago === 1 || metodoPago === 2 || metodoPago === 3) {
+        break;
+      } else {
+        alert("Método de pago no válido. Inténtelo nuevamente.");
+      }
+    }
+
+    if (metodoPago === 1) {
+      let cuotas;
+
+      while (true) {
+        cuotas = Number(prompt("Seleccione cantidad de cuotas: 3, 6, 12"));
+
+        if (cuotas === 3 || cuotas === 6 || cuotas === 12) {
+          break;
+        } else {
+          alert("Cantidad de cuotas no válida. Inténtelo nuevamente.");
+        }
+      }
+
+      procesarPago(productoSeleccionado, metodoPago, cuotas);
+    } else {
+      procesarPago(productoSeleccionado, metodoPago);
+    }
+
+    break;
+  } else {
+    alert("Producto no encontrado. Inténtelo nuevamente.");
+  }
 }
